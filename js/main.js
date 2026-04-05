@@ -233,3 +233,18 @@ document.querySelectorAll(".sort-btn").forEach((btn) => {
 
 // ===== 初始化渲染 =====
 renderProducts(PRODUCTS);
+
+// ===== 汉堡菜单 =====
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+hamburgerBtn.addEventListener("click", () => {
+  hamburgerBtn.classList.toggle("open");
+  mobileMenu.classList.toggle("open");
+});
+// 点击菜单链接后关闭
+mobileMenu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    hamburgerBtn.classList.remove("open");
+    mobileMenu.classList.remove("open");
+  });
+});
