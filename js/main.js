@@ -1,5 +1,5 @@
 // ===== 你的 Telegram 链接在这里修改 =====
-const TELEGRAM_LINK = "https://t.me/jack_6794";
+const TELEGRAM_LINK = "https://t.me/Joy_kup";
 
 // ===== 渲染商品列表 =====
 function renderStars(rating) {
@@ -41,7 +41,7 @@ function renderProducts(products) {
             <span class="card-price">¥${p.price.toLocaleString()}</span>
             <span class="card-old-price">¥${p.oldPrice.toLocaleString()}</span>
           </div>
-          <span class="card-sold">已售${p.sold > 999 ? (p.sold/1000).toFixed(1)+"k" : p.sold}</span>
+          <span class="card-sold">已售${p.sold > 999 ? (p.sold / 1000).toFixed(1) + "k" : p.sold}</span>
         </div>
       </div>
     `;
@@ -67,7 +67,7 @@ function openModal(p) {
   // 价格
   document.getElementById("modalPrice").textContent = `¥${p.price.toLocaleString()}`;
   document.getElementById("modalOldPrice").textContent = `¥${p.oldPrice.toLocaleString()}`;
-  document.getElementById("modalDiscount").textContent = p.discount;
+
 
   // 主图
   const mainImg = document.getElementById("modalMainImg");
@@ -130,41 +130,24 @@ function openModal(p) {
     sizesEl.appendChild(btn);
   });
 
-  // 亮点
-  const highlightsEl = document.getElementById("modalHighlights");
-  highlightsEl.innerHTML = p.highlights.map((h) => `<li>${h}</li>`).join("");
-
-  // 参数网格
-  const paramsEl = document.getElementById("modalParams");
-  paramsEl.innerHTML = p.params
-    .map(
-      (param) => `
-    <div class="param-cell">
-      <div class="param-key">${param.key}</div>
-      <div class="param-val">${param.val}</div>
-    </div>
-  `
-    )
-    .join("");
-
-  // 规格参数表格
-  const paramsTable = document.getElementById("paramsTable");
-  paramsTable.innerHTML = p.params
-    .map(
-      (param) => `
-    <tr>
-      <td>${param.key}</td>
-      <td>${param.val}</td>
-    </tr>
-  `
-    )
-    .join("");
-
   // Telegram 链接更新
-  document.querySelector(".contact-btn.telegram").href = TELEGRAM_LINK;
+  const msg = `
+👜 商品咨询
+名称：${p.name}
+价格：¥${p.price}
+分类：${p.category}
+`;
 
-  // 重置 tab
-  switchTab("intro");
+  const tgBtn = document.querySelector(".contact-btn.telegram");
+
+  // 1. 设置跳转链接（直接进私聊）
+  tgBtn.href = TELEGRAM_LINK;
+
+  // 2. 点击时复制信息
+  tgBtn.onclick = () => {
+    navigator.clipboard.writeText(msg);
+  };
+
 
   // 显示弹窗
   document.getElementById("modalOverlay").classList.add("active");
