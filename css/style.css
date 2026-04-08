@@ -747,6 +747,40 @@ img { display: block; max-width: 100%; }
   background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
 
+.fixed-contact-btn {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: #229ED9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  transition: transform var(--transition), background var(--transition);
+}
+.fixed-contact-btn:hover {
+  transform: translateY(-50%) scale(1.02);
+  background: #1a86bb;
+}
+.fixed-contact-btn .contact-icon {
+  font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  .fixed-contact-btn {
+    right: 16px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
 /* Modal Tabs */
 .modal-tabs {
   display: flex;
