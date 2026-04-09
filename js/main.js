@@ -1,6 +1,16 @@
 // ===== 你的 Telegram 链接在这里修改 =====
 const TELEGRAM_LINK = "https://t.me/Joy_kup";
 
+// ===== 状态管理 =====
+let currentCat = "all";
+let currentSort = "manual";
+let currentPriceFilter = null;
+let displayedCount = 12; // 初始显示12个商品
+let displayedProducts = [];
+let filteredProducts = [];
+let isLoading = false; // 加载状态标志
+let scrollTimeout = null; // 节流计时器
+
 // ===== 渲染商品列表 =====
 function renderStars(rating) {
   const full = Math.floor(rating);
@@ -16,10 +26,40 @@ function getBadgeClass(badge) {
   return "";
 }
 
+function generateProducts() {
+  let result = PRODUCTS;
+
+  // 分类筛选
+  if (currentCat !== "all") {
+    result = result.filter((p) => p.category === currentCat);
+  }
+
+  // 价格筛选
+  if (currentPriceFilter) {
+    const [min, max] = currentPriceFilter;
+    result = result.filter((p) => p.price >= min && p.price <= max);
+  }
+
+  // 排序
+  if (currentSort === "price-asc") {
+    result = result.sort((a, b) => a.price - b.price);
+  } else if (currentSort === "price-desc") {
+    result = result.sort((a, b) => b.price - a.price);
+  } else if (currentSort === "new") {
+    result = result.sort((a, b) => b.id - a.id);
+  }
+
+  filteredProducts = result;
+  return result;
+}
+
 function renderProducts(products) {
   const grid = document.getElementById("productGrid");
+  const count = displayedCount;
+  displayedProducts = products.slice(0, count);
+
   grid.innerHTML = "";
-  products.forEach((p) => {
+  displayedProducts.forEach((p) => {
     const card = document.createElement("div");
     card.className = "product-card";
     card.innerHTML = `
@@ -50,6 +90,47 @@ function renderProducts(products) {
   });
 }
 
+// ===== 增量加载（只添加新商品，不重新渲染所有） =====
+function appendProducts(products) {
+  const grid = document.getElementById("productGrid");
+  const startIndex = displayedProducts.length;
+  const endIndex = displayedCount;
+  const newProducts = products.slice(startIndex, endIndex);
+
+  newProducts.forEach((p) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = `
+      <div class="card-img-wrap">
+        <img class="card-img" src="${p.images[0]}" alt="${p.name}" loading="lazy" />
+        ${p.badge ? `<span class="card-badge ${getBadgeClass(p.badge)}">${p.badgeText}</span>` : ""}
+        <span class="card-fav">♡</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-rating">
+          <span class="stars">${renderStars(p.rating)}</span>
+          <span class="rating-score">${p.ratingScore}</span>
+          <span class="rating-count">(${p.reviews})</span>
+        </div>
+        <div class="card-footer">
+          <div>
+            <span class="card-price">¥${p.price.toLocaleString()}</span>
+            <span class="card-old-price">¥${p.oldPrice.toLocaleString()}</span>
+          </div>
+          <span class="card-sold">已售${p.sold > 999 ? (p.sold / 1000).toFixed(1) + "k" : p.sold}</span>
+        </div>
+      </div>
+    `;
+    card.addEventListener("click", () => openModal(p));
+    grid.appendChild(card);
+  });
+
+  displayedProducts = products.slice(0, endIndex);
+  isLoading = false;
+}
+
 // ===== 打开弹窗 =====
 function openModal(p) {
   // 标题 & 描述
@@ -67,7 +148,6 @@ function openModal(p) {
   // 价格
   document.getElementById("modalPrice").textContent = `¥${p.price.toLocaleString()}`;
   document.getElementById("modalOldPrice").textContent = `¥${p.oldPrice.toLocaleString()}`;
-
 
   // 主图
   const mainImg = document.getElementById("modalMainImg");
@@ -148,7 +228,6 @@ function openModal(p) {
     navigator.clipboard.writeText(msg);
   };
 
-
   // 显示弹窗
   document.getElementById("modalOverlay").classList.add("active");
   document.body.style.overflow = "hidden";
@@ -180,16 +259,14 @@ document.querySelectorAll(".modal-tab").forEach((tab) => {
 });
 
 // ===== 分类 Tab 筛选 =====
-let currentCat = "all";
 document.querySelectorAll(".tab-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     currentCat = btn.dataset.cat;
-    const filtered =
-      currentCat === "all"
-        ? PRODUCTS
-        : PRODUCTS.filter((p) => p.category === currentCat);
+    displayedCount = 12; // 重置显示数量
+    isLoading = false; // 重置加载状态
+    const filtered = generateProducts();
     renderProducts(filtered);
   });
 });
@@ -211,11 +288,75 @@ document.querySelectorAll(".sort-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".sort-btn").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
+    currentSort = btn.dataset.sort;
+    displayedCount = 12; // 重置显示数量
+    isLoading = false; // 重置加载状态
+    const filtered = generateProducts();
+    renderProducts(filtered);
   });
 });
 
+// ===== 价格筛选 =====
+// 为价格选择器添加标准属性和事件监听器
+const priceSelect = document.querySelector(".filter-group select");
+if (priceSelect) {
+  const label = priceSelect.previousElementSibling;
+  if (label && label.textContent.includes("价格")) {
+    priceSelect.setAttribute("title", "price");
+    const options = priceSelect.querySelectorAll("option");
+    if (options.length >= 5) {
+      options[0].value = "";
+      options[1].value = "0-500";
+      options[2].value = "500-1000";
+      options[3].value = "1000-2000";
+      options[4].value = "2000+";
+    }
+    
+    priceSelect.addEventListener("change", (e) => {
+      const priceFilters = {
+        "": null,
+        "0-500": [0, 500],
+        "500-1000": [500, 1000],
+        "1000-2000": [1000, 2000],
+        "2000+": [2000, Infinity]
+      };
+      currentPriceFilter = priceFilters[e.target.value];
+      displayedCount = 12; // 重置显示数量
+      isLoading = false; // 重置加载状态
+      const filtered = generateProducts();
+      renderProducts(filtered);
+    });
+  }
+}
+
+// ===== 无限滚动加载 =====
+window.addEventListener("scroll", () => {
+  // 清除之前的计时器
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+  }
+
+  // 使用节流，500ms 检查一次
+  scrollTimeout = setTimeout(() => {
+    const scrollPercentage = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+    
+    // 避免重复加载，当滚动到85%且还有更多商品时加载
+    if (scrollPercentage > 0.85 && displayedCount < filteredProducts.length && !isLoading) {
+      isLoading = true;
+      displayedCount += 6; // 每次加载6个
+      
+      // 使用 requestAnimationFrame 确保平滑加载
+      requestAnimationFrame(() => {
+        appendProducts(filteredProducts);
+      });
+    }
+  }, 500); // 节流间隔500ms
+});
+
 // ===== 初始化渲染 =====
-renderProducts(PRODUCTS);
+generateProducts();
+renderProducts(filteredProducts);
+isLoading = false;
 
 // ===== 汉堡菜单 =====
 const hamburgerBtn = document.getElementById("hamburgerBtn");
