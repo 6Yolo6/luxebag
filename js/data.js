@@ -122,7 +122,7 @@ const PRODUCTS = [
     sold: 512,
     badge: null,
     images: [
-      "image/水桶包1.jpg",
+      "image/路易威登-all-in-bb-手袋.png",
       "image/水桶包2.jpg",
     ],
     colors: ["#1a1a1a", "#808080", "#228B22"],
@@ -189,7 +189,7 @@ const PRODUCTS = [
     badgeText: "NEW",
     images: [
       "image/斜挎包1.jpg",
-      "image/水桶包2.jpg",
+      "image/路易威登-all-in-bb-手袋.png",
     ],
     colors: ["#8B4513", "#1a1a1a", "#D2B48C"],
     sizes: ["小号 (20*8*16cm)", "大号 (26*10*20cm)"],
@@ -221,7 +221,7 @@ const PRODUCTS = [
     badge: "hot",
     badgeText: "HOT",
     images: [
-      "image/手提包2.jpg",
+      "image/路易威登-all-in-bb-手袋.png",
       "image/手提包1.jpg",
     ],
     colors: ["#FFD700", "#C0C0C0", "#FF1493"],
