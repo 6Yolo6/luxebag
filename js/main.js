@@ -302,3 +302,25 @@ mobileMenu.querySelectorAll(".mobile-nav-link").forEach((link) => {
     mobileMenu.classList.remove("open");
   });
 });
+
+// ===== 主题切换 =====
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+const html = document.documentElement;
+
+// 从本地存储获取主题，默认为dark
+const savedTheme = localStorage.getItem("theme") || "dark";
+html.setAttribute("data-theme", savedTheme);
+updateThemeButton(savedTheme);
+
+function updateThemeButton(theme) {
+  themeToggleBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+}
+
+themeToggleBtn.addEventListener("click", () => {
+  const currentTheme = html.getAttribute("data-theme");
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+  html.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  updateThemeButton(newTheme);
+});
