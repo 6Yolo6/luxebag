@@ -48,10 +48,10 @@ const PRODUCTS = [
     "desc": "HOBO手袋，共 4 张图片",
     "price": 1810,
     "images": [
+      "image/Lv/HOBO手袋/LOOP HOBO 手袋_$1810/路易威登-loop-hobo-手袋-monogram-时尚手袋--M46311_PM2_Front view.png",
       "image/Lv/HOBO手袋/LOOP HOBO 手袋_$1810/路易威登-loop-hobo-手袋-monogram-时尚手袋--M46311_PM1_Closeup view.png",
       "image/Lv/HOBO手袋/LOOP HOBO 手袋_$1810/路易威登-loop-hobo-手袋-monogram-时尚手袋--M46311_PM1_Interior view.png",
       "image/Lv/HOBO手袋/LOOP HOBO 手袋_$1810/路易威登-loop-hobo-手袋-monogram-时尚手袋--M46311_PM1_Side view.png",
-      "image/Lv/HOBO手袋/LOOP HOBO 手袋_$1810/路易威登-loop-hobo-手袋-monogram-时尚手袋--M46311_PM2_Front view.png"
     ]
   },
   {
@@ -74,10 +74,10 @@ const PRODUCTS = [
     "desc": "HOBO手袋，共 4 张图片",
     "price": 1566,
     "images": [
+      "image/Lv/HOBO手袋/The Drop 小号手袋_$1566/路易威登-the-drop-小号手袋-monogram-时尚手袋--M12940_PM2_Front view.png",
       "image/Lv/HOBO手袋/The Drop 小号手袋_$1566/路易威登-the-drop-小号手袋-monogram-时尚手袋--M12940_PM1_Detail view.png",
       "image/Lv/HOBO手袋/The Drop 小号手袋_$1566/路易威登-the-drop-小号手袋-monogram-时尚手袋--M12940_PM1_Interior view.png",
       "image/Lv/HOBO手袋/The Drop 小号手袋_$1566/路易威登-the-drop-小号手袋-monogram-时尚手袋--M12940_PM1_Side view.png",
-      "image/Lv/HOBO手袋/The Drop 小号手袋_$1566/路易威登-the-drop-小号手袋-monogram-时尚手袋--M12940_PM2_Front view.png"
     ]
   },
   {
