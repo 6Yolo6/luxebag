@@ -19,13 +19,6 @@ function renderStars(rating) {
   return "★".repeat(full) + (half ? "½" : "") + "☆".repeat(empty);
 }
 
-function getBadgeClass(badge) {
-  if (badge === "hot") return "badge-hot";
-  if (badge === "new") return "badge-new";
-  if (badge === "sale") return "badge-sale";
-  return "";
-}
-
 function generateProducts() {
   let result = PRODUCTS;
 
@@ -65,23 +58,15 @@ function renderProducts(products) {
     card.innerHTML = `
       <div class="card-img-wrap">
         <img class="card-img" src="${p.images[0]}" alt="${p.name}" loading="lazy" />
-        ${p.badge ? `<span class="card-badge ${getBadgeClass(p.badge)}">${p.badgeText}</span>` : ""}
         <span class="card-fav">♡</span>
       </div>
       <div class="card-body">
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.desc}</div>
-        <div class="card-rating">
-          <span class="stars">${renderStars(p.rating)}</span>
-          <span class="rating-score">${p.ratingScore}</span>
-          <span class="rating-count">(${p.reviews})</span>
-        </div>
         <div class="card-footer">
           <div>
             <span class="card-price">¥${p.price.toLocaleString()}</span>
-            <span class="card-old-price">¥${p.oldPrice.toLocaleString()}</span>
           </div>
-          <span class="card-sold">已售${p.sold > 999 ? (p.sold / 1000).toFixed(1) + "k" : p.sold}</span>
         </div>
       </div>
     `;
@@ -103,23 +88,15 @@ function appendProducts(products) {
     card.innerHTML = `
       <div class="card-img-wrap">
         <img class="card-img" src="${p.images[0]}" alt="${p.name}" loading="lazy" />
-        ${p.badge ? `<span class="card-badge ${getBadgeClass(p.badge)}">${p.badgeText}</span>` : ""}
         <span class="card-fav">♡</span>
       </div>
       <div class="card-body">
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.desc}</div>
-        <div class="card-rating">
-          <span class="stars">${renderStars(p.rating)}</span>
-          <span class="rating-score">${p.ratingScore}</span>
-          <span class="rating-count">(${p.reviews})</span>
-        </div>
         <div class="card-footer">
           <div>
             <span class="card-price">¥${p.price.toLocaleString()}</span>
-            <span class="card-old-price">¥${p.oldPrice.toLocaleString()}</span>
           </div>
-          <span class="card-sold">已售${p.sold > 999 ? (p.sold / 1000).toFixed(1) + "k" : p.sold}</span>
         </div>
       </div>
     `;
@@ -137,32 +114,14 @@ function openModal(p) {
   document.getElementById("modalTitle").textContent = p.name;
   document.getElementById("modalDesc").textContent = p.desc;
 
-  // 评分
-  document.getElementById("modalRating").innerHTML = `
-    <span class="stars">${renderStars(p.rating)}</span>
-    <span>${p.ratingScore} 分</span>
-    <span style="color:var(--text-muted)">(${p.reviews} 条评价)</span>
-    <span style="color:var(--text-muted)">已售 ${p.sold.toLocaleString()}</span>
-  `;
-
   // 价格
   document.getElementById("modalPrice").textContent = `¥${p.price.toLocaleString()}`;
-  document.getElementById("modalOldPrice").textContent = `¥${p.oldPrice.toLocaleString()}`;
 
   // 主图
   const mainImg = document.getElementById("modalMainImg");
   mainImg.src = p.images[0];
   mainImg.alt = p.name;
 
-  // 徽章
-  const badge = document.getElementById("modalBadge");
-  if (p.badge) {
-    badge.textContent = p.badgeText;
-    badge.className = `modal-badge ${getBadgeClass(p.badge)}`;
-  } else {
-    badge.textContent = "";
-    badge.className = "modal-badge";
-  }
 
   // 缩略图
   const thumbsEl = document.getElementById("modalThumbs");
@@ -179,35 +138,6 @@ function openModal(p) {
       t.classList.add("active");
     });
     thumbsEl.appendChild(t);
-  });
-
-  // 颜色
-  const colorsEl = document.getElementById("modalColors");
-  colorsEl.innerHTML = "";
-  p.colors.forEach((c, i) => {
-    const btn = document.createElement("button");
-    btn.className = `modal-color-btn ${i === 0 ? "active" : ""}`;
-    btn.style.background = c;
-    btn.title = c;
-    btn.addEventListener("click", () => {
-      colorsEl.querySelectorAll(".modal-color-btn").forEach((el) => el.classList.remove("active"));
-      btn.classList.add("active");
-    });
-    colorsEl.appendChild(btn);
-  });
-
-  // 尺码
-  const sizesEl = document.getElementById("modalSizes");
-  sizesEl.innerHTML = "";
-  p.sizes.forEach((s, i) => {
-    const btn = document.createElement("button");
-    btn.className = `modal-size-btn ${i === 0 ? "active" : ""}`;
-    btn.textContent = s;
-    btn.addEventListener("click", () => {
-      sizesEl.querySelectorAll(".modal-size-btn").forEach((el) => el.classList.remove("active"));
-      btn.classList.add("active");
-    });
-    sizesEl.appendChild(btn);
   });
 
   // Telegram 链接更新
