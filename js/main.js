@@ -58,7 +58,6 @@ function renderProducts(products) {
     card.innerHTML = `
       <div class="card-img-wrap">
         <img class="card-img" src="${p.images[0]}" alt="${p.name}" loading="lazy" />
-        <span class="card-fav">♡</span>
       </div>
       <div class="card-body">
         <div class="card-name">${p.name}</div>
