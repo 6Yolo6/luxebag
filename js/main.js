@@ -65,7 +65,7 @@ function renderProducts(products) {
         <div class="card-desc">${p.desc}</div>
         <div class="card-footer">
           <div>
-            <span class="card-price">¥${p.price.toLocaleString()}</span>
+            <span class="card-price">$${p.price.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ function appendProducts(products) {
         <div class="card-desc">${p.desc}</div>
         <div class="card-footer">
           <div>
-            <span class="card-price">¥${p.price.toLocaleString()}</span>
+            <span class="card-price">$${p.price.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@ function openModal(p) {
   document.getElementById("modalDesc").textContent = p.desc;
 
   // 价格
-  document.getElementById("modalPrice").textContent = `¥${p.price.toLocaleString()}`;
+  document.getElementById("modalPrice").textContent = `$${p.price.toLocaleString()}`;
 
   // 主图
   const mainImg = document.getElementById("modalMainImg");
@@ -144,7 +144,7 @@ function openModal(p) {
   const msg = `
 👜 商品咨询
 名称：${p.name}
-价格：¥${p.price}
+价格：$${p.price}
 分类：${p.category}
 `;
 
