@@ -6,7 +6,6 @@ const LANGUAGE_MAP = {
   all: null,
   hobo: "HOBO手袋",
   shoulder: "单肩包",
-  backpack: "双肩包",
   mini: "迷你包",
   belt: "腰包",
   crossbody: "斜挎包",
@@ -18,7 +17,6 @@ const LANGUAGE_MAP = {
 const CATEGORY_KEY_MAP = {
   "HOBO手袋": "hobo",
   "单肩包": "shoulder",
-  "双肩包": "backpack",
   "迷你包": "mini",
   "腰包": "belt",
   "斜挎包": "crossbody",
@@ -31,7 +29,6 @@ const PRODUCT_DESC_TRANSLATIONS = {
   ko: {
     "HOBO手袋": "HOBO 핸드백",
     "单肩包": "숄더백",
-    "双肩包": "백팩",
     "手袋": "토트백",
     "斜挎包": "크로스바디",
     "水桶包": "버킷백",
@@ -40,7 +37,6 @@ const PRODUCT_DESC_TRANSLATIONS = {
   en: {
     "HOBO手袋": "HOBO bag",
     "单肩包": "shoulder bag",
-    "双肩包": "backpack",
     "手袋": "handbag",
     "斜挎包": "crossbody bag",
     "水桶包": "bucket bag",
@@ -49,7 +45,6 @@ const PRODUCT_DESC_TRANSLATIONS = {
   zh: {
     "HOBO手袋": "HOBO手袋",
     "单肩包": "单肩包",
-    "双肩包": "双肩包",
     "手袋": "手袋",
     "斜挎包": "斜挎包",
     "水桶包": "水桶包",
@@ -58,7 +53,6 @@ const PRODUCT_DESC_TRANSLATIONS = {
   de: {
     "HOBO手袋": "HOBO Tasche",
     "单肩包": "Schultertasche",
-    "双肩包": "Rucksack",
     "手袋": "Handtasche",
     "斜挎包": "Umhängetasche",
     "水桶包": "Bucket-Tasche",
@@ -81,11 +75,6 @@ const PRODUCT_NAME_TRANSLATIONS = {
     4: "LOOP HOBO 백 모노그램 패션 백 M46311",
     5: "X TM CARRYALL EAST WEST 백 기타 모노그램 캔버스 패션 백 M27578",
     6: "THE DROP 소형 백 모노그램 패션 백 M12940",
-    7: "BACKUP 백팩 모노그램 엠프렝뜨 패션 백 M47106",
-    8: "BACKUP 백팩 바이컬러 모노그램 엠프렝뜨 가죽 패션 백 M12987",
-    9: "MONTSOURIS CARGO 백팩 모노그램 데님 패션 백 M27330",
-    10: "MONTSOURIS 소형 백팩 기타 모노그램 캔버스 패션 백 M15135",
-    11: "SOHO 중형 백팩 모노그램 패션 백 M14653",
     12: "CARRY IT 백 기타 모노그램 캔버스 패션 백 M15121",
     13: "NEVERFULL INSIDE OUT BB 백 기타 가죽 여성 백 M28336",
     14: "NEVERFULL INSIDE OUT 중형 백 기타 가죽 여성 백 M28352",
@@ -104,7 +93,9 @@ const PRODUCT_NAME_TRANSLATIONS = {
     27: "PETIT NOÉ 버킷 백 모노그램 패션 백 M46984",
     28: "LV x TM NANO SPEEDY 백 기타 모노그램 캔버스 미니 백 M13391",
     29: "PETITE MALLE 백 모노그램 패션 백 M28243",
-    30: "POCHETTE MIA 백 모노그램 소형 가죽 제품 M26191"
+    30: "POCHETTE MIA 백 모노그램 소형 가죽 제품 M26191",
+    31: "NANO DIANE 백 모노그램 데님 소형 가죽 제품 M27700",
+    32: "NANO SPEEDY 백 모노그램 데님 소형 가죽 제품 M27603"
   },
   en: {
     1: "ALL IN BB bag Monogram Empreinte fashion bag M13480",
@@ -113,11 +104,6 @@ const PRODUCT_NAME_TRANSLATIONS = {
     4: "LOOP HOBO bag Monogram fashion bag M46311",
     5: "X TM CARRYALL EAST WEST bag Other Monogram canvas fashion bag M27578",
     6: "THE DROP small bag Monogram fashion bag M12940",
-    7: "BACKUP backpack Monogram Empreinte fashion bag M47106",
-    8: "BACKUP backpack Bicolor Monogram Empreinte leather fashion bag M12987",
-    9: "MONTSOURIS CARGO backpack Monogram denim fashion bag M27330",
-    10: "MONTSOURIS small backpack Other Monogram canvas fashion bag M15135",
-    11: "SOHO medium backpack Monogram fashion bag M14653",
     12: "CARRY IT bag Other Monogram canvas fashion bag M15121",
     13: "NEVERFULL INSIDE OUT BB bag Other leathers women bag M28336",
     14: "NEVERFULL INSIDE OUT medium bag Other leathers women bag M28352",
@@ -136,7 +122,9 @@ const PRODUCT_NAME_TRANSLATIONS = {
     27: "PETIT NOÉ bucket bag Monogram fashion bag M46984",
     28: "LV x TM NANO SPEEDY bag Other Monogram canvas mini bag M13391",
     29: "PETITE MALLE bag Monogram fashion bag M28243",
-    30: "POCHETTE MIA bag Monogram mini leather good M26191"
+    30: "POCHETTE MIA bag Monogram mini leather good M26191",
+    31: "NANO DIANE bag Monogram denim mini leather good M27700",
+    32: "NANO SPEEDY bag Monogram denim mini leather good M27603"
   },
   zh: {
     1: "all in bb 手袋 monogram empreinte 时尚手袋 M13480",
@@ -145,11 +133,6 @@ const PRODUCT_NAME_TRANSLATIONS = {
     4: "loop hobo 手袋 monogram 时尚手袋 M46311",
     5: "x tm carryall east west 手袋 其他monogram 帆布 时尚手袋 M27578",
     6: "the drop 小号手袋 monogram 时尚手袋 M12940",
-    7: "backup 双肩包 monogram empreinte 时尚手袋 M47106",
-    8: "backup 双肩包 bicolor monogram empreinte leather 时尚手袋 M12987",
-    9: "montsouris cargo 双肩包 monogram denim 时尚手袋 M27330",
-    10: "montsouris 小号双肩包 其他monogram 帆布 时尚手袋 M15135",
-    11: "soho 中号双肩包 monogram 时尚手袋 M14653",
     12: "carry it 手袋 其他monogram 帆布 时尚手袋 M15121",
     13: "neverfull inside out bb 手袋 other leathers 女士包袋 M28336",
     14: "neverfull inside out 中号手袋 other leathers 女士包袋 M28352",
@@ -168,7 +151,9 @@ const PRODUCT_NAME_TRANSLATIONS = {
     27: "petit noé 手袋 monogram 时尚手袋 M46984",
     28: "x tm nano speedy 手袋 其他monogram 帆布 小型皮具 M13391",
     29: "petite malle 手袋 monogram 时尚手袋 M28243",
-    30: "pochette mia 手袋 monogram 小型皮具 M26191"
+    30: "pochette mia 手袋 monogram 小型皮具 M26191",
+    31: "nano diane 手袋 monogram denim 小型皮具 M27700",
+    32: "nano speedy 手袋 monogram denim 小型皮具 M27603"
   },
   de: {
     1: "ALL IN BB Tasche Monogram Empreinte Fashion Tasche M13480",
@@ -177,11 +162,6 @@ const PRODUCT_NAME_TRANSLATIONS = {
     4: "LOOP HOBO Tasche Monogram Fashion Tasche M46311",
     5: "X TM CARRYALL EAST WEST Tasche Other Monogram Canvas Fashion Tasche M27578",
     6: "THE DROP kleine Tasche Monogram Fashion Tasche M12940",
-    7: "BACKUP Rucksack Monogram Empreinte Fashion Tasche M47106",
-    8: "BACKUP Rucksack Bicolor Monogram Empreinte Leder Fashion Tasche M12987",
-    9: "MONTSOURIS CARGO Rucksack Monogram Denim Fashion Tasche M27330",
-    10: "MONTSOURIS kleiner Rucksack Other Monogram Canvas Fashion Tasche M15135",
-    11: "SOHO mittlerer Rucksack Monogram Fashion Tasche M14653",
     12: "CARRY IT Tasche Other Monogram Canvas Fashion Tasche M15121",
     13: "NEVERFULL INSIDE OUT BB Tasche Other Leathers Damen Tasche M28336",
     14: "NEVERFULL INSIDE OUT mittlere Tasche Other Leathers Damen Tasche M28352",
@@ -200,7 +180,9 @@ const PRODUCT_NAME_TRANSLATIONS = {
     27: "PETIT NOÉ Bucket Tasche Monogram Fashion Tasche M46984",
     28: "LV x TM NANO SPEEDY Tasche Other Monogram Canvas Mini Tasche M13391",
     29: "PETITE MALLE Tasche Monogram Fashion Tasche M28243",
-    30: "POCHETTE MIA Tasche Monogram Mini Lederartikel M26191"
+    30: "POCHETTE MIA Tasche Monogram Mini Lederartikel M26191",
+    31: "NANO DIANE Tasche Monogram Denim Mini Lederartikel M27700",
+    32: "NANO SPEEDY Tasche Monogram Denim Mini Lederartikel M27603"
   }
 };
 
@@ -254,7 +236,6 @@ const TRANSLATIONS = {
       all: "全部",
       hobo: "HOBO手袋",
       shoulder: "单肩包",
-      backpack: "双肩包",
       mini: "迷你包",
       belt: "腰包",
       crossbody: "斜挎包",
