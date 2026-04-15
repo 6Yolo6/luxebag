@@ -367,10 +367,10 @@ const PRODUCTS = [
     "desc": "迷你包，共 4 张图片",
     "price": 1000,
     "images": [
+      "image/补充/迷你包/NANO DIANE 手袋_$1000/路易威登-nano-diane-手袋-monogram-denim-小型皮具--M27700_PM2_Front view.png",
       "image/补充/迷你包/NANO DIANE 手袋_$1000/路易威登-nano-diane-手袋-monogram-denim-小型皮具--M27700_PM1_Back view.png",
       "image/补充/迷你包/NANO DIANE 手袋_$1000/路易威登-nano-diane-手袋-monogram-denim-小型皮具--M27700_PM1_Interior view.png",
       "image/补充/迷你包/NANO DIANE 手袋_$1000/路易威登-nano-diane-手袋-monogram-denim-小型皮具--M27700_PM1_Side view.png",
-      "image/补充/迷你包/NANO DIANE 手袋_$1000/路易威登-nano-diane-手袋-monogram-denim-小型皮具--M27700_PM2_Front view.png"
     ]
   },
   {
@@ -380,10 +380,10 @@ const PRODUCTS = [
     "desc": "迷你包，共 4 张图片",
     "price": 1000,
     "images": [
+      "image/补充/迷你包/NANO SPEEDY 手袋_$1000/路易威登-nano-speedy-手袋-monogram-denim-小型皮具--M27603_PM2_Front view.png",
       "image/补充/迷你包/NANO SPEEDY 手袋_$1000/路易威登-nano-speedy-手袋-monogram-denim-小型皮具--M27603_PM1_Back view.png",
       "image/补充/迷你包/NANO SPEEDY 手袋_$1000/路易威登-nano-speedy-手袋-monogram-denim-小型皮具--M27603_PM1_Interior view.png",
       "image/补充/迷你包/NANO SPEEDY 手袋_$1000/路易威登-nano-speedy-手袋-monogram-denim-小型皮具--M27603_PM1_Side view.png",
-      "image/补充/迷你包/NANO SPEEDY 手袋_$1000/路易威登-nano-speedy-手袋-monogram-denim-小型皮具--M27603_PM2_Front view.png"
     ]
   }
 ];
